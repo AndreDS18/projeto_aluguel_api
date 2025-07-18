@@ -1,0 +1,70 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model favoritos {
+  favorito_id Int      @id @unique(map: "favorito_id") @default(autoincrement())
+  usuario_id  Int
+  imovel_id   Int
+  usuarios    usuarios @relation(fields: [usuario_id], references: [usuario_id], onUpdate: Restrict, map: "favoritos_fk1")
+  imoveis     imoveis  @relation(fields: [imovel_id], references: [imovel_id], onUpdate: Restrict, map: "favoritos_fk2")
+
+  @@index([usuario_id], map: "favoritos_fk1")
+  @@index([imovel_id], map: "favoritos_fk2")
+}
+
+model imoveis {
+  imovel_id              Int               @id @unique(map: "imovel_id") @default(autoincrement())
+  imovel_nome            String            @db.VarChar(50)
+  imovel_endereco        String            @db.VarChar(50)
+  imovel_endereco_numero String            @db.VarChar(10)
+  imovel_bairro          String            @db.VarChar(50)
+  imovel_cidade          String            @db.VarChar(50)
+  imovel_estado          String            @db.VarChar(50)
+  imovel_complemento     String?           @db.VarChar(100)
+  imovel_quartos         Int
+  imovel_banheiros       Int
+  imovel_garagens        Int
+  imovel_metragem        Int
+  imovel_disponibilidade String            @db.VarChar(20)
+  imovel_descricao       String            @db.Text
+  usuario_id             Int
+  tipo_id                Int
+  favoritos              favoritos[]
+  usuarios               usuarios          @relation(fields: [usuario_id], references: [usuario_id], onUpdate: Restrict, map: "imoveis_fk14")
+  tipos                  tipos             @relation(fields: [tipo_id], references: [tipo_id], onUpdate: Restrict, map: "imoveis_fk15")
+  imoveis_imagens        imoveis_imagens[]
+
+  @@index([usuario_id], map: "imoveis_fk14")
+  @@index([tipo_id], map: "imoveis_fk15")
+}
+
+model imoveis_imagens {
+  imagem_id  Int     @id @unique(map: "imagem_id") @default(autoincrement())
+  imagem_url String  @db.VarChar(255)
+  imovel_id  Int
+  imoveis    imoveis @relation(fields: [imovel_id], references: [imovel_id], onUpdate: Restrict, map: "imoveis_imagens_fk2")
+
+  @@index([imovel_id], map: "imoveis_imagens_fk2")
+}
+
+model tipos {
+  tipo_id   Int       @id @unique(map: "tipo_id") @default(autoincrement())
+  tipo_nome String    @db.VarChar(50)
+  imoveis   imoveis[]
+}
+
+model usuarios {
+  usuario_id    Int         @id @unique(map: "usuario_id") @default(autoincrement())
+  usuario_nome  String      @db.VarChar(50)
+  usuario_email String      @db.VarChar(50)
+  usuario_senha String      @db.VarChar(255)
+  favoritos     favoritos[]
+  imoveis       imoveis[]
+}
