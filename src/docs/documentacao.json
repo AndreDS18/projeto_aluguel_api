@@ -380,6 +380,301 @@
           }
         }
       }
+    },
+    "/tipos/": {
+      "get": {
+        "description": "Busca todos os tipos",
+        "responses": {
+          "200": {
+            "description": "Retorna lista de tipos",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "tipo_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "tipo_nome": {
+                    "type": "string",
+                    "example": "Nome do Tipo"
+                  },
+                  "imoveis": {
+                    "type": "array",
+                    "example": [],
+                    "items": {}
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Cria um tipo",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tipo_nome": {
+                  "type": "string",
+                  "example": "Nome do tipo"
+                }
+              },
+              "required": [
+                "tipo_nome"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "tipo criado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro criado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tipos/{id}": {
+      "get": {
+        "description": "Busca um tipo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna um tipo",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tipo_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "tipo_nome": {
+                  "type": "string",
+                  "example": "Nome do Tipo"
+                },
+                "imoveis": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Edita um tipo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tipo_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "tipo_nome": {
+                  "type": "string",
+                  "example": "Nome do tipo"
+                }
+              },
+              "required": [
+                "tipo_id",
+                "tipo_nome"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "tipo atualizado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro atualizado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deleta um tipo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "tipo deletado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro deletado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

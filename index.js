@@ -1,8 +1,10 @@
 import express from "express";
 import cors from "cors";
 import usuarioRoutes from "./src/routes/usuarioRoute.js";
+import tipoRoutes from "./src/routes/tipoRoute.js"
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './src/docs/documentacao.json' with { type: 'json' };
+
 
 const app = express();
 const port = 8000;
@@ -35,6 +37,17 @@ app.use("/usuarios",
             }
     } */
     usuarioRoutes
+);
+
+app.use("/tipos", 
+    /* #swagger.responses[422] = {
+            description: 'Erro interno',
+            schema: {
+                type: 'error',
+                description: 'mensagem do sistema',
+            }
+    } */
+    tipoRoutes
 );
 
 app.listen(port, () => {
