@@ -48,8 +48,57 @@ async function criar(dados) {
     }
 }
 
+async function editar(dados, id) {
+    try {
+        const requisicao = await prisma.usuarios.update({
+            data: dados,
+            where: {
+                usuario_id: Number(id)
+            }
+        });
+
+        if (requisicao) {
+            return {
+                type: "success",
+                description: "Registro atualizado com sucesso"
+            }
+        }
+
+    } catch (error) {
+        return {
+            type: "error",
+            description: error.message
+        }
+    }
+}
+
+async function deletar(id) {
+    try {
+        const requisicao = await prisma.usuarios.delete({
+            where: {
+                usuario_id: Number(id)
+            }
+        });
+
+        if (requisicao) {
+            return {
+                type: "success",
+                description: "Registro deletado com sucesso"
+            }
+        }
+
+    } catch (error) {
+        return {
+            type: "error",
+            description: error.message
+        }
+    }
+}
+
 export {
     buscarTodos,
     buscarUm,
-    criar
+    criar,
+    editar,
+    deletar
 }

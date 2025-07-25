@@ -1,0 +1,385 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API Aluga Web",
+    "description": "Obtenha todos os dados da aplicação",
+    "version": "1.0.0"
+  },
+  "host": "localhost:8000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/": {
+      "get": {
+        "description": "Busca todos os usuários",
+        "responses": {
+          "200": {
+            "description": "Retorna lista de usuarios",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "usuario_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "usuario_nome": {
+                    "type": "string",
+                    "example": "Nome do Usuario"
+                  },
+                  "usuario_email": {
+                    "type": "string",
+                    "example": "email@email.com"
+                  },
+                  "usuario_senha": {
+                    "type": "string",
+                    "example": "senha-encriptada"
+                  },
+                  "favoritos": {
+                    "type": "array",
+                    "example": [],
+                    "items": {}
+                  },
+                  "imoveis": {
+                    "type": "array",
+                    "example": [],
+                    "items": {}
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Cria um usuario",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "usuario_nome": {
+                  "type": "string",
+                  "example": "Nome do Usuario"
+                },
+                "usuario_email": {
+                  "type": "string",
+                  "example": "email@email.com"
+                },
+                "usuario_senha": {
+                  "type": "string",
+                  "example": "senha-usuario"
+                }
+              },
+              "required": [
+                "usuario_nome",
+                "usuario_email",
+                "usuario_senha"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario criado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro criado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/usuarios/{id}": {
+      "get": {
+        "description": "Busca um usuário",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna um usuario",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "usuario_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "usuario_nome": {
+                  "type": "string",
+                  "example": "Nome do Usuario"
+                },
+                "usuario_email": {
+                  "type": "string",
+                  "example": "email@email.com"
+                },
+                "usuario_senha": {
+                  "type": "string",
+                  "example": "senha-encriptada"
+                },
+                "favoritos": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                },
+                "imoveis": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Edita um usuario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "usuario_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "usuario_nome": {
+                  "type": "string",
+                  "example": "Nome do Usuario"
+                },
+                "usuario_email": {
+                  "type": "string",
+                  "example": "email@email.com"
+                },
+                "usuario_senha": {
+                  "type": "string",
+                  "example": "senha-usuario"
+                }
+              },
+              "required": [
+                "usuario_id",
+                "usuario_nome",
+                "usuario_email",
+                "usuario_senha"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario atualizado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro atualizado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deleta um usuario",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Usuario deletado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro deletado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
