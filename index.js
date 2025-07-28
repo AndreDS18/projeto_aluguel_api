@@ -1,7 +1,8 @@
 import express from "express";
 import cors from "cors";
 import usuarioRoutes from "./src/routes/usuarioRoute.js";
-import tipoRoutes from "./src/routes/tipoRoute.js"
+import tipoRoutes from "./src/routes/tipoRoute.js";
+import imovelRoutes from "./src/routes/imovelRoute.js";
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './src/docs/documentacao.json' with { type: 'json' };
 
@@ -48,6 +49,17 @@ app.use("/tipos",
             }
     } */
     tipoRoutes
+);
+
+app.use("/imoveis", 
+    /* #swagger.responses[422] = {
+            description: 'Erro interno',
+            schema: {
+                type: 'error',
+                description: 'mensagem do sistema',
+            }
+    } */
+    imovelRoutes
 );
 
 app.listen(port, () => {
