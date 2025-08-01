@@ -10,8 +10,7 @@ router.get("/", async (req, res) => {
             schema: [{
                 imagem_id: 1,
                 imagem_url: "Nome da URL",
-                imovel_id: 1,
-                imoveis:[]
+                imovel_id: 1
             }]
     } */
     res.send(await buscarTodos());
@@ -24,8 +23,7 @@ router.get("/:id", async (req, res) => {
             schema: {
                 imagem_id: 1,
                 imagem_url: "Nome da URL",
-                imovel_id: 1,
-                imoveis:[]
+                imovel_id: 1
             }
     } */
     res.send(await buscarUm(req.params.id));
@@ -42,7 +40,7 @@ router.post("/", async (req, res) => {
                 }
         } */
     /* #swagger.responses[200] = {
-            description: 'Usuario criado',
+            description: 'imagem criada',
             schema: {
                 type: 'success',
                 description: 'Registro criado com sucesso.',
@@ -62,7 +60,7 @@ router.put("/:id", async (req, res) => {
                 }
         } */
     /* #swagger.responses[200] = {
-            description: 'Imagem atualizado',
+            description: 'Imagem atualizada',
             schema: {
                 type: 'success',
                 description: 'Registro atualizado com sucesso.',
@@ -75,7 +73,7 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
     // #swagger.description = "Deleta uma imagem"
     /* #swagger.responses[200] = {
-            description: 'Usuario deletado',
+            description: 'imagem deletada',
             schema: {
                 type: 'success',
                 description: 'Registro deletado com sucesso.',
