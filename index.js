@@ -76,6 +76,17 @@ app.use("/imoveis",
     imovelRoutes
 );
 
+app.use("/favoritos", 
+    /* #swagger.responses[422] = {
+            description: 'Erro interno',
+            schema: {
+                type: 'error',
+                description: 'mensagem do sistema',
+            }
+    } */
+    favoritosRoutes
+);
+
 app.listen(port, () => {
     console.log(`Servidor de pé: http://localhost:${port}`);
 })
