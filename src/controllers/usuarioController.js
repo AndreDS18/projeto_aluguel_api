@@ -1,4 +1,6 @@
 import { prisma } from "../utils/index.js";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 async function buscarTodos() {
     try {
@@ -8,7 +10,7 @@ async function buscarTodos() {
             type: "error",
             description: error.message
         }
-    }x
+    } x
 }
 
 async function buscarUm(id) {
@@ -24,13 +26,13 @@ async function buscarUm(id) {
             description: error.message
         }
     }
-
 }
 
 async function criar(dados) {
     try {
+        const senhaCriptografada = await bcrypt.hash(dados.usuario_senha, 10);
         const requisicao = await prisma.usuarios.create({
-            data: dados
+            data: { ...dados, usuario_senha: senhaCriptografada }
         });
 
         if (requisicao) {
@@ -50,8 +52,9 @@ async function criar(dados) {
 
 async function editar(dados, id) {
     try {
+        const senhaCriptografada = await bcrypt.hash(dados.usuario_senha, 10);
         const requisicao = await prisma.usuarios.update({
-            data: dados,
+            data: { ...dados, usuario_senha: senhaCriptografada },
             where: {
                 usuario_id: Number(id)
             }
@@ -86,7 +89,41 @@ async function deletar(id) {
                 description: "Registro deletado com sucesso"
             }
         }
+    } catch (error) {
+        return {
+            type: "error",
+            description: error.message
+        }
+    }
+}
 
+async function login(dados) {
+    try {
+        const usuario = await prisma.usuarios.findFirst({
+            where: {
+                usuario_email: dados.usuario_email
+            }
+        })
+
+        if (usuario) {
+            let senhaEstaCorreta = await bcrypt.compare(dados.usuario_senha, usuario.usuario_senha)
+            if (senhaEstaCorreta) {
+                let token = jwt.sign({usuario_id: usuario.usuario_id}, process.env.CHAVE, { expiresIn: "1h" });
+                return {
+                    token
+                };
+            } else {
+                return {
+                    type: "warning",
+                    description: "Email ou senha inválido"
+                }
+            }
+        }
+
+        return {
+            type: "warning",
+            description: "Email ou senha inválido"
+        }
     } catch (error) {
         return {
             type: "error",
@@ -100,5 +137,6 @@ export {
     buscarUm,
     criar,
     editar,
-    deletar
+    deletar,
+    login
 }

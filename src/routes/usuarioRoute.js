@@ -1,9 +1,10 @@
 import express from "express";
 import { buscarTodos, buscarUm, criar, deletar, editar } from "../controllers/usuarioController.js";
+import { rotaProtegida } from "../utils/index.js";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/", rotaProtegida, async (req, res) => {
     // #swagger.description = "Busca todos os usuários"
     /* #swagger.responses[200] = {
             description: 'Retorna lista de usuarios',

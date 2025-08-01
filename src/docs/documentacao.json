@@ -676,6 +676,314 @@
         }
       }
     },
+    "/imagens/": {
+      "get": {
+        "description": "Busca todos os usuários",
+        "responses": {
+          "200": {
+            "description": "Retorna lista de imagens",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "imagem_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "imagem_url": {
+                    "type": "string",
+                    "example": "Nome da URL"
+                  },
+                  "imovel_id": {
+                    "type": "number",
+                    "example": 1
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Cria uma imagem",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "imagem_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "imagem_url": {
+                  "type": "string",
+                  "example": "Nome da URL"
+                },
+                "imovel_id": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "required": [
+                "imagem_id",
+                "imagem_url",
+                "imovel_id"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "imagem criada",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro criado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/imagens/{id}": {
+      "get": {
+        "description": "Busca uma imagem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna um usuario",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "imagem_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "imagem_url": {
+                  "type": "string",
+                  "example": "Nome da URL"
+                },
+                "imovel_id": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Edita uma imagem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "imagem_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "imagem_url": {
+                  "type": "string",
+                  "example": "Nome da URL"
+                },
+                "imovel_id": {
+                  "type": "number",
+                  "example": 1
+                }
+              },
+              "required": [
+                "imagem_id",
+                "imagem_url",
+                "imovel_id"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Imagem atualizada",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro atualizado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deleta uma imagem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "imagem deletada",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro deletado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
     "/imoveis/": {
       "get": {
         "description": "Busca todos os imoveis",
@@ -687,15 +995,84 @@
               "items": {
                 "type": "object",
                 "properties": {
+                  "imovel_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "imovel_nome": {
+                    "type": "string",
+                    "example": "imovel nome"
+                  },
+                  "imovel_endereco": {
+                    "type": "string",
+                    "example": "endereco"
+                  },
+                  "imovel_endereco_numero": {
+                    "type": "number",
+                    "example": 90
+                  },
+                  "imovel_bairro": {
+                    "type": "string",
+                    "example": "bairro"
+                  },
+                  "imovel_cidade": {
+                    "type": "string",
+                    "example": "cidade"
+                  },
+                  "imovel_estado": {
+                    "type": "string",
+                    "example": "estado"
+                  },
+                  "imovel_complemento": {
+                    "type": "string",
+                    "example": "complemento"
+                  },
+                  "imovel_quartos": {
+                    "type": "number",
+                    "example": 3
+                  },
+                  "imovel_banheiros": {
+                    "type": "number",
+                    "example": 2
+                  },
+                  "imovel_garagens": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "imovel_metragem": {
+                    "type": "number",
+                    "example": 100
+                  },
+                  "imovel_disponibilidade": {
+                    "type": "string",
+                    "example": "aluguel ou venda"
+                  },
+                  "imovel_descricao": {
+                    "type": "string",
+                    "example": "descrição"
+                  },
+                  "usuario_id": {
+                    "type": "number",
+                    "example": 1
+                  },
                   "tipo_id": {
                     "type": "number",
                     "example": 1
                   },
-                  "tipo_nome": {
-                    "type": "string",
-                    "example": "Nome do Imovol"
+                  "favoritos": {
+                    "type": "array",
+                    "example": [],
+                    "items": {}
                   },
-                  "imoveis": {
+                  "usuarios": {
+                    "type": "object",
+                    "properties": {}
+                  },
+                  "tipos": {
+                    "type": "object",
+                    "properties": {}
+                  },
+                  "imoveis_imagens": {
                     "type": "array",
                     "example": [],
                     "items": {}
@@ -737,13 +1114,88 @@
             "schema": {
               "type": "object",
               "properties": {
-                "tipo_nome": {
+                "imovel_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "imovel_nome": {
                   "type": "string",
-                  "example": "Nome do imove."
+                  "example": "imovel nome"
+                },
+                "imovel_endereco": {
+                  "type": "string",
+                  "example": "endereco"
+                },
+                "imovel_endereco_numero": {
+                  "type": "number",
+                  "example": 90
+                },
+                "imovel_bairro": {
+                  "type": "string",
+                  "example": "bairro"
+                },
+                "imovel_cidade": {
+                  "type": "string",
+                  "example": "cidade"
+                },
+                "imovel_estado": {
+                  "type": "string",
+                  "example": "estado"
+                },
+                "imovel_complemento": {
+                  "type": "string",
+                  "example": "complemento"
+                },
+                "imovel_quartos": {
+                  "type": "number",
+                  "example": 3
+                },
+                "imovel_banheiros": {
+                  "type": "number",
+                  "example": 2
+                },
+                "imovel_garagens": {
+                  "type": "number",
+                  "example": 1
+                },
+                "imovel_metragem": {
+                  "type": "number",
+                  "example": 100
+                },
+                "imovel_disponibilidade": {
+                  "type": "string",
+                  "example": "compra ou venda"
+                },
+                "imovel_descricao": {
+                  "type": "string",
+                  "example": "descrição"
+                },
+                "usuario_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "tipo_id": {
+                  "type": "number",
+                  "example": 1
                 }
               },
               "required": [
-                "tipo_nome"
+                "imovel_id",
+                "imovel_nome",
+                "imovel_endereco",
+                "imovel_endereco_numero",
+                "imovel_bairro",
+                "imovel_cidade",
+                "imovel_estado",
+                "imovel_complemento",
+                "imovel_quartos",
+                "imovel_banheiros",
+                "imovel_garagens",
+                "imovel_metragem",
+                "imovel_disponibilidade",
+                "imovel_descricao",
+                "usuario_id",
+                "tipo_id"
               ]
             }
           }
@@ -807,15 +1259,84 @@
             "schema": {
               "type": "object",
               "properties": {
+                "imovel_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "imovel_nome": {
+                  "type": "string",
+                  "example": "imovel nome"
+                },
+                "imovel_endereco": {
+                  "type": "string",
+                  "example": "endereco"
+                },
+                "imovel_endereco_numero": {
+                  "type": "number",
+                  "example": 90
+                },
+                "imovel_bairro": {
+                  "type": "string",
+                  "example": "bairro"
+                },
+                "imovel_cidade": {
+                  "type": "string",
+                  "example": "cidade"
+                },
+                "imovel_estado": {
+                  "type": "string",
+                  "example": "estado"
+                },
+                "imovel_complemento": {
+                  "type": "string",
+                  "example": "complemento"
+                },
+                "imovel_quartos": {
+                  "type": "number",
+                  "example": 3
+                },
+                "imovel_banheiros": {
+                  "type": "number",
+                  "example": 2
+                },
+                "imovel_garagens": {
+                  "type": "number",
+                  "example": 1
+                },
+                "imovel_metragem": {
+                  "type": "number",
+                  "example": 100
+                },
+                "imovel_disponibilidade": {
+                  "type": "string",
+                  "example": "aluguel ou venda"
+                },
+                "imovel_descricao": {
+                  "type": "string",
+                  "example": "descrição"
+                },
+                "usuario_id": {
+                  "type": "number",
+                  "example": 1
+                },
                 "tipo_id": {
                   "type": "number",
                   "example": 1
                 },
-                "tipo_nome": {
-                  "type": "string",
-                  "example": "Nome do Imovel"
+                "favoritos": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
                 },
-                "imoveis": {
+                "usuarios": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "tipos": {
+                  "type": "object",
+                  "properties": {}
+                },
+                "imoveis_imagens": {
                   "type": "array",
                   "example": [],
                   "items": {}
@@ -862,18 +1383,88 @@
             "schema": {
               "type": "object",
               "properties": {
-                "tipo_id": {
+                "imovel_id": {
                   "type": "number",
                   "example": 1
                 },
-                "tipo_nome": {
+                "imovel_nome": {
                   "type": "string",
-                  "example": "Nome do imovel"
+                  "example": "imovel nome"
+                },
+                "imovel_endereco": {
+                  "type": "string",
+                  "example": "endereco"
+                },
+                "imovel_endereco_numero": {
+                  "type": "number",
+                  "example": 90
+                },
+                "imovel_bairro": {
+                  "type": "string",
+                  "example": "bairro"
+                },
+                "imovel_cidade": {
+                  "type": "string",
+                  "example": "cidade"
+                },
+                "imovel_estado": {
+                  "type": "string",
+                  "example": "estado"
+                },
+                "imovel_complemento": {
+                  "type": "string",
+                  "example": "complemento"
+                },
+                "imovel_quartos": {
+                  "type": "number",
+                  "example": 3
+                },
+                "imovel_banheiros": {
+                  "type": "number",
+                  "example": 2
+                },
+                "imovel_garagens": {
+                  "type": "number",
+                  "example": 1
+                },
+                "imovel_metragem": {
+                  "type": "number",
+                  "example": 100
+                },
+                "imovel_disponibilidade": {
+                  "type": "string",
+                  "example": "compra ou venda"
+                },
+                "imovel_descricao": {
+                  "type": "string",
+                  "example": "descrição"
+                },
+                "usuario_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "tipo_id": {
+                  "type": "number",
+                  "example": 1
                 }
               },
               "required": [
-                "tipo_id",
-                "tipo_nome"
+                "imovel_id",
+                "imovel_nome",
+                "imovel_endereco",
+                "imovel_endereco_numero",
+                "imovel_bairro",
+                "imovel_cidade",
+                "imovel_estado",
+                "imovel_complemento",
+                "imovel_quartos",
+                "imovel_banheiros",
+                "imovel_garagens",
+                "imovel_metragem",
+                "imovel_disponibilidade",
+                "imovel_descricao",
+                "usuario_id",
+                "tipo_id"
               ]
             }
           }

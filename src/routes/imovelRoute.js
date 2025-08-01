@@ -1,5 +1,5 @@
 import express from "express";
-import { buscarTodos, buscarUm, criar, deletar, editar } from "../controllers/imovelCoontroller.js";
+import { buscarTodos, buscarUm, criar, deletar, editar } from "../controllers/imovelController.js";
 
 const router = express.Router();
 
@@ -8,9 +8,26 @@ router.get("/", async (req, res) => {
     /* #swagger.responses[200] = {
             description: 'Retorna lista de imoveis',
             schema: [{
+                imovel_id: 1,
+                imovel_nome: "imovel nome",
+                imovel_endereco: "endereco",
+                imovel_endereco_numero: 90,
+                imovel_bairro: "bairro",
+                imovel_cidade: "cidade",
+                imovel_estado: "estado",
+                imovel_complemento: "complemento",
+                imovel_quartos: 3,
+                imovel_banheiros: 2,
+                imovel_garagens: 1,
+                imovel_metragem: 100,
+                imovel_disponibilidade: "aluguel ou venda",
+                imovel_descricao: "descrição",
+                usuario_id: 1,
                 tipo_id: 1,
-                tipo_nome: "Nome do Imovol",             
-                imoveis: [],
+                favoritos: [],
+                usuarios: {},
+                tipos: {},
+                imoveis_imagens: []
             }]
     } */
     res.send(await buscarTodos());
@@ -21,9 +38,26 @@ router.get("/:id", async (req, res) => {
     /* #swagger.responses[200] = {
             description: 'Retorna um  imovel',
             schema: {
+                imovel_id: 1,
+                imovel_nome: "imovel nome",
+                imovel_endereco: "endereco",
+                imovel_endereco_numero: 90,
+                imovel_bairro: "bairro",
+                imovel_cidade: "cidade",
+                imovel_estado: "estado",
+                imovel_complemento: "complemento",
+                imovel_quartos: 3,
+                imovel_banheiros: 2,
+                imovel_garagens: 1,
+                imovel_metragem: 100,
+                imovel_disponibilidade: "aluguel ou venda",
+                imovel_descricao: "descrição",
+                usuario_id: 1,
                 tipo_id: 1,
-                tipo_nome: "Nome do Imovel",             
-                imoveis: [],
+                favoritos: [],
+                usuarios: {},
+                tipos: {},
+                imoveis_imagens: []
             }
     } */
     res.send(await buscarUm(req.params.id));
@@ -34,7 +68,22 @@ router.post("/", async (req, res) => {
     /* #swagger.parameters['obj'] = {
                 in: 'body',
                 schema: {
-                    $tipo_nome: "Nome do imove.",
+                    $imovel_id: 1,
+                    $imovel_nome: "imovel nome",
+                    $imovel_endereco: "endereco",
+                    $imovel_endereco_numero: 90,
+                    $imovel_bairro: "bairro",
+                    $imovel_cidade: "cidade",
+                    $imovel_estado: "estado",
+                    $imovel_complemento: "complemento",
+                    $imovel_quartos: 3,
+                    $imovel_banheiros: 2,
+                    $imovel_garagens: 1,
+                    $imovel_metragem: 100,
+                    $imovel_disponibilidade: "compra ou venda",
+                    $imovel_descricao: "descrição",
+                    $usuario_id: 1,
+                    $tipo_id: 1
                 }
         } */
     /* #swagger.responses[200] = {
@@ -52,8 +101,22 @@ router.put("/:id", async (req, res) => {
     /* #swagger.parameters['obj'] = {
                 in: 'body',
                 schema: {
-                    $tipo_id: 1,
-                    $tipo_nome: "Nome do imovel",
+                    $imovel_id: 1,
+                    $imovel_nome: "imovel nome",
+                    $imovel_endereco: "endereco",
+                    $imovel_endereco_numero: 90,
+                    $imovel_bairro: "bairro",
+                    $imovel_cidade: "cidade",
+                    $imovel_estado: "estado",
+                    $imovel_complemento: "complemento",
+                    $imovel_quartos: 3,
+                    $imovel_banheiros: 2,
+                    $imovel_garagens: 1,
+                    $imovel_metragem: 100,
+                    $imovel_disponibilidade: "compra ou venda",
+                    $imovel_descricao: "descrição",
+                    $usuario_id: 1,
+                    $tipo_id: 1
                 }
         } */
     /* #swagger.responses[200] = {

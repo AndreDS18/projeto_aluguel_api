@@ -2,13 +2,12 @@ import express from "express";
 import cors from "cors";
 import usuarioRoutes from "./src/routes/usuarioRoute.js";
 import tipoRoutes from "./src/routes/tipoRoute.js";
-
 import imovelRoutes from "./src/routes/imovelRoute.js";
-
 import imoveis_imagensRoutes from "./src/routes/imoveis_imagensRoute.js";
-
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from './src/docs/documentacao.json' with { type: 'json' };
+import { login } from "./src/controllers/usuarioController.js";
+import { rotaProtegida } from "./src/utils/index.js";
 
 
 const app = express();
@@ -32,7 +31,9 @@ app.get("/", (req ,res) => {
 })
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
+app.post("/login", async (req, res) => {
+    res.send(await login(req.body));
+})
 app.use("/usuarios", 
     /* #swagger.responses[422] = {
             description: 'Erro interno',
@@ -44,7 +45,7 @@ app.use("/usuarios",
     usuarioRoutes
 );
 
-app.use("/tipos", 
+app.use("/tipos", rotaProtegida, 
     /* #swagger.responses[422] = {
             description: 'Erro interno',
             schema: {
@@ -54,6 +55,7 @@ app.use("/tipos",
     } */
     tipoRoutes
 );
+
 app.use("/imagens", 
     /* #swagger.responses[422] = {
             description: 'Erro interno',
