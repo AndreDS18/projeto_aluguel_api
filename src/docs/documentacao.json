@@ -675,6 +675,301 @@
           }
         }
       }
+    },
+    "/imoveis/": {
+      "get": {
+        "description": "Busca todos os imoveis",
+        "responses": {
+          "200": {
+            "description": "Retorna lista de imoveis",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "tipo_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "tipo_nome": {
+                    "type": "string",
+                    "example": "Nome do Imovol"
+                  },
+                  "imoveis": {
+                    "type": "array",
+                    "example": [],
+                    "items": {}
+                  }
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "description": "Cria um imovel",
+        "parameters": [
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tipo_nome": {
+                  "type": "string",
+                  "example": "Nome do imove."
+                }
+              },
+              "required": [
+                "tipo_nome"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "imovel criado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro criado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/imoveis/{id}": {
+      "get": {
+        "description": "Busca um imovel",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna um imovel",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tipo_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "tipo_nome": {
+                  "type": "string",
+                  "example": "Nome do Imovel"
+                },
+                "imoveis": {
+                  "type": "array",
+                  "example": [],
+                  "items": {}
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "description": "Edita um imovel",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "obj",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tipo_id": {
+                  "type": "number",
+                  "example": 1
+                },
+                "tipo_nome": {
+                  "type": "string",
+                  "example": "Nome do imovel"
+                }
+              },
+              "required": [
+                "tipo_id",
+                "tipo_nome"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "imovel atualizado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro atualizado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Deleta um imovel",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "imovel deletado",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "success"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "Registro deletado com sucesso."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "422": {
+            "description": "Erro interno",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "example": "error"
+                },
+                "description": {
+                  "type": "string",
+                  "example": "mensagem do sistema"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
