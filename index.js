@@ -76,7 +76,7 @@ app.use("/imoveis",
     imovelRoutes
 );
 
-app.use("/imagens", 
+app.use("/favoritos", 
     /* #swagger.responses[422] = {
             description: 'Erro interno',
             schema: {
