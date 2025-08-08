@@ -10,7 +10,7 @@ async function buscarTodos() {
             type: "error",
             description: error.message
         }
-    } x
+    }
 }
 
 async function buscarUm(id) {

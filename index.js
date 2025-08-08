@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import usuarioRoutes from "./src/routes/usuarioRoute.js";
+import favoritosRoutes from "./src/routes/favoritosRoute.js";
 import tipoRoutes from "./src/routes/tipoRoute.js";
 import imovelRoutes from "./src/routes/imovelRoute.js";
 import imoveis_imagensRoutes from "./src/routes/imoveis_imagensRoute.js";
