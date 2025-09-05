@@ -28,12 +28,12 @@ app.get("/", (req ,res) => {
                 description: 'mensagem do sistema',
             }
     } */
-    res.send("Bem-vindo à API Aluga Web")
+    res.redirect("/docs")
 })
 
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.post("/login", async (req, res) => {
-    res.send(await login(req.body));
+    res.json(await login(req.body));
 })
 app.use("/usuarios", 
     /* #swagger.responses[422] = {

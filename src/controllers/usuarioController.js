@@ -30,18 +30,29 @@ async function buscarUm(id) {
 
 async function criar(dados) {
     try {
-        const senhaCriptografada = await bcrypt.hash(dados.usuario_senha, 10);
-        const requisicao = await prisma.usuarios.create({
-            data: { ...dados, usuario_senha: senhaCriptografada }
-        });
-
-        if (requisicao) {
+        const emailCadastrado = await prisma.usuarios.findFirst({
+            where: {
+                usuario_email: dados.usuario_email
+            }
+        })
+        if (emailCadastrado) {
             return {
-                type: "success",
-                description: "Registro criado com sucesso"
+                type: "warning",
+                description: "Já existe um usuário com esse email"
+            }
+        } else {
+            const senhaCriptografada = await bcrypt.hash(dados.usuario_senha, 10);
+            const requisicao = await prisma.usuarios.create({
+                data: { ...dados, usuario_senha: senhaCriptografada }
+            });
+
+            if (requisicao) {
+                return {
+                    type: "success",
+                    description: "Registro criado com sucesso"
+                }
             }
         }
-
     } catch (error) {
         return {
             type: "error",
@@ -108,8 +119,11 @@ async function login(dados) {
         if (usuario) {
             let senhaEstaCorreta = await bcrypt.compare(dados.usuario_senha, usuario.usuario_senha)
             if (senhaEstaCorreta) {
-                let token = jwt.sign({usuario_id: usuario.usuario_id}, process.env.CHAVE, { expiresIn: "1h" });
+                let token = jwt.sign({ usuario_id: usuario.usuario_id }, process.env.CHAVE, { expiresIn: "1h" });
                 return {
+                    type: "success",
+                    description: "Seja bem-vindo(a)",
+                    usuario,
                     token
                 };
             } else {
@@ -119,7 +133,6 @@ async function login(dados) {
                 }
             }
         }
-
         return {
             type: "warning",
             description: "Email ou senha inválido"
