@@ -2,7 +2,12 @@ import { prisma } from "../utils/index.js";
 
 async function buscarTodos() {
     try {
-        return await prisma.imoveis.findMany();
+        return await prisma.imoveis.findMany({
+            include:{
+                tipos: true,
+                usuarios: true
+            }
+        });
     } catch (error) {
         return {
             type: "error",
@@ -24,7 +29,24 @@ async function buscarUm(id) {
             description: error.message
         }
     }
+}
 
+async function buscarPorUsuario(id) {
+    try {
+        return await prisma.imoveis.findMany({
+            where: {
+                usuario_id: Number(id)
+            },
+            include:{
+                tipos: true
+            }
+        });
+    } catch (error) {
+        return {
+            type: "error",
+            description: error.message
+        }
+    }
 }
 
 async function criar(dados) {
@@ -98,6 +120,7 @@ async function deletar(id) {
 export {
     buscarTodos,
     buscarUm,
+    buscarPorUsuario,
     criar,
     editar,
     deletar

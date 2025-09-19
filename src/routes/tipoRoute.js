@@ -1,5 +1,6 @@
 import express from "express";
 import { buscarTodos, buscarUm, criar, deletar, editar } from "../controllers/tipoController.js";
+import { rotaProtegida } from "../utils/index.js";
 
 const router = express.Router();
 
@@ -29,7 +30,7 @@ router.get("/:id", async (req, res) => {
     res.send(await buscarUm(req.params.id));
 });
 
-router.post("/", async (req, res) => {
+router.post("/", rotaProtegida, async (req, res) => {
     // #swagger.description = "Cria um tipo"
     /* #swagger.parameters['obj'] = {
                 in: 'body',
@@ -47,7 +48,7 @@ router.post("/", async (req, res) => {
     res.send(await criar(req.body));
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", rotaProtegida, async (req, res) => {
     // #swagger.description = "Edita um tipo"
     /* #swagger.parameters['obj'] = {
                 in: 'body',
@@ -66,8 +67,7 @@ router.put("/:id", async (req, res) => {
     res.send(await editar(req.body, req.params.id));
 });
 
-
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", rotaProtegida, async (req, res) => {
     // #swagger.description = "Deleta um tipo"
     /* #swagger.responses[200] = {
             description: 'tipo deletado',

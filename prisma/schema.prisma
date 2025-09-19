@@ -65,6 +65,7 @@ model usuarios {
   usuario_nome  String      @db.VarChar(50)
   usuario_email String      @db.VarChar(50)
   usuario_senha String      @db.VarChar(255)
+  usuario_telefone String?      @db.VarChar(50)
   favoritos     favoritos[]
   imoveis       imoveis[]
 }

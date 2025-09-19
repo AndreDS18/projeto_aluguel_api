@@ -5,6 +5,9 @@ export const prisma = new PrismaClient();
 
 export const rotaProtegida = (req, res, next) => {
     try {
+        if(!req.headers.authorization){
+            throw new Error("Token é necessário");
+        }
         let token = req.headers.authorization.split(" ")[1];
         if (token) {
             jwt.verify(token, process.env.CHAVE, (error) => {

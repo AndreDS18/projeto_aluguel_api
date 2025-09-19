@@ -46,7 +46,7 @@ app.use("/usuarios",
     usuarioRoutes
 );
 
-app.use("/tipos", rotaProtegida, 
+app.use("/tipos", 
     /* #swagger.responses[422] = {
             description: 'Erro interno',
             schema: {

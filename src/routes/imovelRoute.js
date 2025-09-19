@@ -1,5 +1,5 @@
 import express from "express";
-import { buscarTodos, buscarUm, criar, deletar, editar } from "../controllers/imovelController.js";
+import { buscarPorUsuario, buscarTodos, buscarUm, criar, deletar, editar } from "../controllers/imovelController.js";
 
 const router = express.Router();
 
@@ -61,6 +61,36 @@ router.get("/:id", async (req, res) => {
             }
     } */
     res.send(await buscarUm(req.params.id));
+});
+
+router.get("/usuario/:id", async (req, res) => {
+    // #swagger.description = "Busca imóveis por usuario"
+    /* #swagger.responses[200] = {
+            description: 'Retorna lista de imóveis do usuario',
+            schema: [{
+                imovel_id: 1,
+                imovel_nome: "imovel nome",
+                imovel_endereco: "endereco",
+                imovel_endereco_numero: 90,
+                imovel_bairro: "bairro",
+                imovel_cidade: "cidade",
+                imovel_estado: "estado",
+                imovel_complemento: "complemento",
+                imovel_quartos: 3,
+                imovel_banheiros: 2,
+                imovel_garagens: 1,
+                imovel_metragem: 100,
+                imovel_disponibilidade: "aluguel ou venda",
+                imovel_descricao: "descrição",
+                usuario_id: 1,
+                tipo_id: 1,
+                favoritos: [],
+                usuarios: {},
+                tipos: {},
+                imoveis_imagens: []
+            }]
+    } */
+    res.send(await buscarPorUsuario(req.params.id));
 });
 
 router.post("/", async (req, res) => {
